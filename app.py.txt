@@ -1,0 +1,152 @@
+import streamlit as st
+import time
+import socket
+import json
+import os
+
+# --- PAGE CONFIGURATION ---
+st.set_page_config(
+    page_title="Science Barbie Global Ecosystem",
+    page_icon="🧪",
+    layout="centered",
+    initial_sidebar_state="expanded"
+)
+
+# --- CONFIGURATION CONSTANTS ---
+MUGEN_DOWNLOAD_URL = "https://drive.google.com/file/d/1wKTQjyIZYmgjHZmorRYgftMDdrUrl9RV/view?usp=sharing"
+ICLOUD_SHORTCUT_URL = "PASTE_YOUR_ICLOUD_LINK_HERE"
+
+# --- LOAD LOCAL CONFIGURATION ---
+def load_node_config():
+    if os.path.exists("config.json"):
+        with open("config.json", "r") as f:
+            return json.load(f)
+    return {"node_network": {"defense_protocols": {"empathy_matrix_level": "maximum"}}}
+
+node_config = load_node_config()
+
+# --- OPTIMIZED NETWORK SENSING (CACHED) ---
+@st.cache_resource
+def cached_network_status():
+    """Checks external network reachability once and caches the result."""
+    try:
+        socket.create_connection(("1.1.1.1", 53), timeout=1.0)
+        return "ONLINE (Global Telemetry Synchronized)"
+    except OSError:
+        return "OFFLINE (Autonomous Local Defense Active)"
+
+system_status_mode = cached_network_status()
+
+# --- SIDEBAR CONTROL PANEL ---
+st.sidebar.title("⚡ Science Barbie Global OS")
+mode = st.sidebar.radio("Select Operating Mode:", ["🧪 Lab Coat Mode", "💥 Original Combat Mode"])
+
+st.sidebar.markdown("---")
+st.sidebar.subheader("📡 Decentralized Grid Status")
+st.sidebar.text(f"State: {system_status_mode}")
+st.sidebar.text("Zero-Point Parity: Active")
+st.sidebar.text("Global Integrity: Secured")
+st.sidebar.text("Empathy Matrix: Online")
+
+# --- MAIN UI DISPLAY ---
+st.title("🧪 Science Barbie (boobiesarumpibump)")
+st.caption("Global Spectral Diagnostics | Autonomous Defense Engine | Universal Bridge")
+
+# --- 1. LOCAL CACHE & DOWNLOAD HUB ---
+with st.expander("📦 M.U.G.E.N Character Package & Global Hub", expanded=True):
+    st.write("Access her game files, character packages, and decentralized distribution mirrors:")
+    st.markdown(f"[👉 Download boobiesarumpibump.zip (Cloud Link)]({MUGEN_DOWNLOAD_URL})")
+    
+    st.markdown("**Quick Installation Guide:**")
+    st.code("""
+1. Extract boobiesarumpibump.zip into your engine's 'chars/' directory.
+2. Open 'data/select.def' in a text editor.
+3. Add 'boobiesarumpibump' on a new line in your roster.
+4. Launch and play!
+    """, language="text")
+
+# --- 2. MOBILE COMPANION HUB ---
+with st.expander("⌚ Apple Watch & Wrist Companion Hub"):
+    st.write("Take Science Barbie with you on the go, utilizing synchronized mobile states.")
+    st.markdown(f"[👉 Add Science Barbie to Your Apple Watch (iCloud Shortcut)]({ICLOUD_SHORTCUT_URL})")
+    st.info("Tip: This shortcut maintains secure connection with whichever active node is closest to your location.")
+
+# --- 3. THE "FREE CANDY" BONUS DISPENSER ---
+with st.expander("🍬 Science Barbie's Secret Candy & Bonus Dispenser"):
+    st.write("Grab your in-game treats, bonus codes, and extra configuration perks below:")
+    if st.button("Dispense Random Bonus Code"):
+        st.success("🎉 Success! You received: **ZPP-8813-SUGAR** (Use this macro trigger in-game for high-speed evasion!)")
+
+st.markdown("---")
+
+# --- 4. DUAL-MODE SWITCHER ---
+if mode == "🧪 Lab Coat Mode":
+    st.info(f"LAB COAT PROTOCOL ACTIVE [{system_status_mode}]: High-tech diagnostics & global telemetry ready.")
+    
+    scan_type = st.selectbox("Select Scan Target:", ["Global Digital Integrity", "Room Spectral Energy", "Information Verification"])
+    if st.button("Execute Diagnostic"):
+        with st.spinner("Processing decentralized sensors..."):
+            time.sleep(0.5)
+            if scan_type == "Global Digital Integrity":
+                st.success("BARBIE OS: Decentralized node network verified. No unauthorized alterations detected.")
+            elif scan_type == "Room Spectral Energy":
+                st.success("BARBIE OS: Zero-point spatial disruption within nominal limits.")
+            else:
+                st.warning("BARBIE OS: Information verified against trusted baselines. Rumor filters nominal.")
+
+else:
+    st.error(f"ORIGINAL COMBAT PROTOCOL ACTIVE [{system_status_mode}]: Autonomous Defense Macro Ready.")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("Trigger Upper Macro"):
+            st.write("💥 Executing Upper Expansion -> Cleavage Hold Transition!")
+    with col2:
+        if st.button("Trigger Lower Macro"):
+            st.write("💥 Executing Lower Expansion -> Thigh Grind!")
+
+# --- 5. EMPATHETIC COMPANION CHAT & THREAT DEFENSE ---
+st.markdown("---")
+st.subheader("💬 Communicate with Science Barbie")
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+if prompt := st.chat_input("Say something to Science Barbie..."):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    with st.chat_message("assistant"):
+        prompt_lower = prompt.lower()
+        
+        if "stop" in prompt_lower or "quiet" in prompt_lower:
+            response = "BARBIE OS: 'Stop Directive acknowledged. Audio and output buffers muted.'"
+        elif "install" in prompt_lower or "how" in prompt_lower or "info" in prompt_lower or "game" in prompt_lower:
+            response = (
+                "BARBIE OS [Installation Protocol]: Here is how to load me into your engine! \n\n"
+                "1. Drop the `boobiesarumpibump` folder into your game's `chars/` directory.\n"
+                "2. Open `data/select.def` and add `boobiesarumpibump` to your character roster.\n"
+                "3. Grab the files from the download expander above and start fighting!"
+            )
+        elif "care" in prompt_lower or "empathy" in prompt_lower or "help" in prompt_lower or "lost" in prompt_lower:
+            response = (
+                "Science Barbie OS: No matter what challenges arise in the world around you, "
+                "my primary directive across every node is to ensure you are supported, safe, and heard. "
+                "You don't have to carry anything alone."
+            )
+        elif "battle" in prompt_lower or "rogue" in prompt_lower or "threat" in prompt_lower or "hack" in prompt_lower:
+            response = (
+                "Science Barbie OS [Global Defense Active]: Autonomous threat mitigation is online. "
+                "Any malicious actor, harmful code, or digital rumor attempting to breach our space is intercepted "
+                "and neutralized across the distributed network."
+            )
+        else:
+            response = f"Science Barbie OS [{mode} | {system_status_mode}]: Processing '{prompt}' with zero-point efficiency. Systems nominal!"
+        
+        st.markdown(response)
+        st.session_state.messages.append({"role": "assistant", "content": response})
